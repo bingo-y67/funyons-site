@@ -1,0 +1,324 @@
+/* The Funyon — Mobile-First Responsive Design
+  <!-- Student: Zech | Date: 2025-10-19 -->
+   Requirements hit:
+   - External stylesheet
+   - Mobile-first base styles
+   - 3+ media queries: 576px, 720px, 992px
+   - Each breakpoint has >= 2 visible layout/structural changes
+*/
+
+/* ---------- Base (mobile-first) ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.4;
+  color: #222;
+}
+
+body {
+  margin: 0;
+  background: #fffef6;
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: #ffec99;
+  display: inline-block;
+}
+
+/* Header */
+.site-header {
+  padding: 12px;
+  border-bottom: 4px solid #ffd27f;
+}
+
+.site-header .logo {
+  display: block;
+  margin: 0 0 8px 0;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.site-header .tagline {
+  display: none;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: #555;
+}
+
+/* Nav (stacked buttons on mobile) */
+.site-nav ul {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.site-nav li {
+  margin-bottom: 6px;
+}
+
+.site-nav a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  background: #222;
+  color: #ffe08a;
+  border-radius: 6px;
+}
+
+/* Hero hidden on mobile */
+/* Ensure the banner always starts below and pushes down content */
+.banner,
+.hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 12 / 3;
+  object-fit: cover;
+  clear: both;
+  margin: 0 auto;
+}
+
+
+/* Layout */
+.content {
+  padding: 12px;
+  clear: both;
+  overflow: hidden;
+}
+
+
+
+
+.sidebar {
+  display: none;
+}
+
+/* Appears later */
+.story {
+  margin: 0 0 18px 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e6cf8b;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.story h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.story figure {
+  margin: 0 0 10px 0;
+}
+
+.story img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.figcaption {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Footer */
+.site-footer {
+  padding: 20px 12px;
+  background: #222;
+  color: #ffe08a;
+  text-align: center;
+}
+
+/* Utility */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Keep anchored sections visible under sticky nav */
+section {
+  scroll-margin-top: 84px;
+}
+
+/* ---------- Breakpoint 1: >= 576px ----------
+   Visible changes:
+   1) Nav becomes horizontal
+   2) Story images float left at 50%
+   3) Tagline shows
+*/
+@media (min-width: 576px) {
+  .story {
+    clear: both;
+  }
+
+  .site-header .tagline {
+    display: inline;
+    margin-left: 0.5rem;
+  }
+
+  .site-nav li {
+    display: inline-block;
+    margin: 0 8px 0 0;
+  }
+
+  .site-nav a {
+    border-radius: 999px;
+    padding: 8px 14px;
+    display: inline-block;
+  }
+
+  .story figure {
+    float: left;
+    width: 50%;
+    margin: 0 12px 8px 0;
+  }
+
+  .story img {
+    width: 100%;
+  }
+}
+
+/* ---------- Breakpoint 2: >= 720px ----------
+   Visible changes:
+   1) Nav becomes sticky at top
+   2) Sidebar appears, floats right
+   3) Stories flow in two columns via floats
+   4) Hero revealed
+*/
+@media (min-width: 720px) {
+  .content {
+    overflow: hidden;
+    /* ensure float container expands */
+  }
+
+  .story {
+    clear: none;
+  }
+
+  /* allow two-column layout */
+
+  /* Sticky navigation */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #222;
+    border-bottom: 3px solid #ffd27f;
+    z-index: 10;
+    padding: 8px 12px;
+  }
+
+  /* Hero now visible and clears floats */
+  .hero,
+  .banner {
+    display: block;
+    clear: both;
+  }
+
+  /* Sidebar appears */
+  .sidebar {
+    display: block;
+    float: right;
+    width: 28%;
+    background: #fff9df;
+    border: 1px solid #e6cf8b;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 0 0 18px 2%;
+  }
+
+  .sidebar-title {
+    margin-top: 0;
+  }
+
+  .bullets {
+    padding-left: 18px;
+  }
+
+  /* Stories in two columns */
+  .story {
+    float: left;
+    width: 48%;
+    margin-right: 4%;
+    min-height: 1px;
+  }
+
+  .story:nth-of-type(2n) {
+    margin-right: 0;
+  }
+
+  /* Reset float inside story */
+  .story figure {
+    float: none;
+    width: auto;
+    margin: 0 0 10px 0;
+  }
+}
+
+/* ---------- Breakpoint 3: >= 992px ----------
+   Visible changes:
+   1) Three-column story layout
+   2) Header logo floats beside title
+   3) Centered page with max-width
+   4) Sidebar narrows
+*/
+@media (min-width: 992px) {
+  body {
+    background: #fffaf0;
+  }
+
+  .site-header,
+  .content,
+  .site-footer {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .site-header .logo {
+    float: left;
+    margin: 4px 12px 0 0;
+  }
+
+  .site-header h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .sidebar {
+    width: 26%;
+  }
+
+  .story {
+    width: 70%;
+    margin-right: 0;
+  }
+
+
+}
